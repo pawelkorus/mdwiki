@@ -40,23 +40,21 @@ module.exports = function(grunt) {
             // gimmicks
             'js/gimmicks/templating.js',
             'js/gimmicks/prism.js',
-            /*
-             'js/gimmicks/googlemaps.js',
-             'js/gimmicks/alerts.js',
-            'js/gimmicks/colorbox.js',
+            // 'js/gimmicks/googlemaps.js',
+            // 'js/gimmicks/alerts.js',
+            // 'js/gimmicks/colorbox.js',
             // 'js/gimmicks/carousel.js',
-            'js/gimmicks/disqus.js',
-            'js/gimmicks/editme.js',
-            'js/gimmicks/facebooklike.js',
-            'js/gimmicks/forkmeongithub.js',
-            'js/gimmicks/gist.js',
-            'js/gimmicks/iframe.js',
-            'js/gimmicks/math.js',
-            // // 'js/gimmicks/leaflet.js',
-            'js/gimmicks/twitter.js',
-            'js/gimmicks/youtube_embed.js',
-            'js/gimmicks/yuml.js'
-            */
+            // 'js/gimmicks/disqus.js'
+            // 'js/gimmicks/editme.js',
+            // 'js/gimmicks/facebooklike.js',
+            // 'js/gimmicks/forkmeongithub.js',
+            // 'js/gimmicks/gist.js',
+            // 'js/gimmicks/iframe.js',
+            // 'js/gimmicks/math.js',
+            // 'js/gimmicks/leaflet.js',
+            // 'js/gimmicks/twitter.js',
+            // 'js/gimmicks/youtube_embed.js',
+            // 'js/gimmicks/yuml.js'
         ],
 
         // REMEMBER:
@@ -186,16 +184,16 @@ module.exports = function(grunt) {
                 command: 'cd release && zip -r mdwiki-<%= grunt.config("pkg").version %>.zip mdwiki-<%= grunt.config("pkg").version %>'
             },
             /* precompilation of our handlebars templates */
-            compile_templates: {
-                options: {
-                    stdout: true
-                },
-                // -n mdwiki = Namespace is mdwiki
-                // -f outputfile
-                // -r root for the templates (will mirror the FS structure to the template name)
-                // -m = minify
-                command: './node_modules/.bin/handlebars -f tmp/MDwiki.templates.js -r templates -m templates/**/*.html'
-            }
+            //compile_templates: {
+            //    options: {
+            //        stdout: true
+            //    },
+            // -n mdwiki = Namespace is mdwiki
+            // -f outputfile
+            // -r root for the templates (will mirror the FS structure to the template name)
+            // -m = minify
+            //    command: './node_modules/.bin/handlebars -f tmp/MDwiki.templates.js -r templates -m templates/**/*.html'
+            //}
         },
         watch: {
             files: [
@@ -253,7 +251,7 @@ module.exports = function(grunt) {
 
     /*** NAMED TASKS ***/
     grunt.registerTask('release', [ 'ts', 'less:min', 'shell:compile_templates', 'concat:dev', 'uglify:dist', 'index' ]);
-    grunt.registerTask('debug', [ 'ts', 'less:dev', 'shell:compile_templates', 'concat:dev',  'index_debug' ]);
+    grunt.registerTask('debug', [ 'ts', 'less:dev', /*'shell:compile_templates', !!!!! precompile templates with handlebars first*/ 'concat:dev',  'index_debug' ]);
     grunt.registerTask('devel', [ 'debug', 'server', 'unittests', 'reload', 'watch' ]);
     grunt.registerTask('unittests', [ 'copy:unittests' ]);
 
