@@ -107,10 +107,10 @@ module MDwiki.Core {
         }
     };
 */
-    var set_theme = function($links, opt, text, tc: ThemeChooser) {
+    var set_theme = function($links:JQuery<HTMLElement>, opt:any, text:string, tc: ThemeChooser) {
         opt.name = opt.name || text;
         $links.each(function (i, link) {
-            $.md.stage('postgimmick').subscribe(function(done) {
+            $.md.stage('postgimmick').subscribe(function(done:Function) {
                 if (!tc.currentTheme ||  tc.currentTheme == '' || tc.enableChooser == false)
                     tc.load(opt.name);
                 done();
@@ -128,7 +128,7 @@ module MDwiki.Core {
     }
 
     // creates the "Select Theme" navbar entry
-    var themechooser = function($links, opt, text, tc: ThemeChooser) {
+    var themechooser = function($links:JQuery<HTMLElement>, opt:any, text:string, tc: ThemeChooser) {
         return $links.each(function(i, e) {
             var $this = $(e);
             var $chooser = $('<a href=""></a><ul></ul>'

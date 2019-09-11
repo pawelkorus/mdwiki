@@ -1,7 +1,11 @@
+let Gimmick = require('../ts/gimmickloader').Gimmick,
+    GimmickHandler = require('../ts/gimmickloader').GimmickHandler,
+    Prism = require('prismjs');
+
 (function($) {
 
-    var prismGimmick = new MDwiki.Gimmick.Gimmick('prism');
-    var prismHandler = new MDwiki.Gimmick.GimmickHandler('multiline');
+    var prismGimmick = new Gimmick('prism');
+    var prismHandler = new GimmickHandler('multiline');
     prismHandler.loadStage = 'ready';
 
     var supportedLangs = [

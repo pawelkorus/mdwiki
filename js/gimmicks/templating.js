@@ -1,6 +1,9 @@
+let Gimmick = require('../ts/gimmickloader').Gimmick,
+    GimmickHandler = require('../ts/gimmickloader').GimmickHandler;
+
 (function($, Handlebars) {
-    var templateGimmick = new MDwiki.Gimmick.Gimmick('template');
-    var templateHandler = new MDwiki.Gimmick.GimmickHandler('singleline');
+    var templateGimmick = new Gimmick('template');
+    var templateHandler = new GimmickHandler('singleline');
     templateHandler.loadStage = 'ready';
 
     templateHandler.callback = function(ref, done) {

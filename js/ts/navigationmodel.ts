@@ -2,8 +2,8 @@
 module MDwiki.DataModels {
 
     export class NavigationBarParser {
-        private navbar;
-        private node: any;
+        private navbar:NavigationBarModel;
+        private node: JQuery<HTMLElement>;
 
         constructor (node: any) {
             this.node = $(node);
@@ -38,9 +38,9 @@ module MDwiki.DataModels {
             });
         }
 
-        private findSublevelEntries (ul: JQuery): SublevelEntry[] {
-            let found_sublevel_entries = [];
-            $(ul).find("li").each((i, e) => {
+        private findSublevelEntries (ul:any): SublevelEntry[] {
+            let found_sublevel_entries:any[] = [];
+            $(ul).find("li").each((i:number, e:HTMLElement) => {
                 // TODO is this always only one child?
                 let child = $(e).children();
                 let sublevel_entry = this.getSublevelEntry(e);
@@ -80,28 +80,5 @@ module MDwiki.DataModels {
         href: string = "";
         seperator: boolean = false;
     }
-
-    // TODO remove this? is this used?
-    function buildSampleMenu() {
-        var navbar = new NavigationBarModel();
-        var t1 = new ToplevelEntry();
-        t1.title = "About";
-        t1.href = "index.md";
-        var t2 = new ToplevelEntry();
-        t2.title = "Docs";
-        t2.href = "";
-
-        var s1 = new SublevelEntry();
-        s1.title = "Quickstart";
-        s1.href = "quickstart.md";
-        t2.childs.push(s1);
-
-        var s2 = new SublevelEntry();
-        s2.title = "Quickstart";
-        s2.href = "quickstart.md";
-        t2.childs.push(s2);
-
-        navbar.toplevelEntries.push(t1);
-        navbar.toplevelEntries.push(t2);
-    }
+    
 }

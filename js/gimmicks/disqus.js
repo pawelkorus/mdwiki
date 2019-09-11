@@ -55,7 +55,8 @@
         });
     }
 
-    var disqusGimmick = new MDwiki.Core.Gimmick();
-    disqusGimmick.addHandler('disqus', disqus);
+    var disqusGimmick = new MDwiki.Gimmick.Gimmick('disqus');
+    var disqusGimmickHandler = new MDwiki.Gimmick.GimmickHandler('link', disqus);
+    disqusGimmick.addHandler(disqusGimmickHandler);
     $.md.wiki.gimmicks.registerGimmick(disqusGimmick);
 }(jQuery));

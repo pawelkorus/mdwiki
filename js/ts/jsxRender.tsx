@@ -48,11 +48,11 @@ class JsxRender {
 let heading = "Hello world!";
 let arr = [1, 2, 3];
 
-let rendered =
+let rendered = `
     <div>
         <h1>{heading}</h1>
         {['foo', 'bar'].map(i => <h1>{i}</h1>) }
-    </div>
+    </div>`
 
 // setTimeout(() => {
 //     document.body.appendChild(rendered);

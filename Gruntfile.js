@@ -27,69 +27,16 @@ module.exports = function(grunt) {
             version: '0.7.0'
         },
 
-        ownJsFiles: [
-            'js/marked.js',
-            'js/init.js',
-            'ts_compiled/mdwiki_ts.js',
-            'tmp/MDwiki.templates.js',
-            'js/main.js',
-            'js/util.js',
-            'js/basic_skeleton.js',
-            'js/bootstrap.js',
-
-            // gimmicks
-            'js/gimmicks/templating.js',
-            'js/gimmicks/prism.js',
-            // 'js/gimmicks/googlemaps.js',
-            // 'js/gimmicks/alerts.js',
-            // 'js/gimmicks/colorbox.js',
-            // 'js/gimmicks/carousel.js',
-            // 'js/gimmicks/disqus.js'
-            // 'js/gimmicks/editme.js',
-            // 'js/gimmicks/facebooklike.js',
-            // 'js/gimmicks/forkmeongithub.js',
-            // 'js/gimmicks/gist.js',
-            // 'js/gimmicks/iframe.js',
-            // 'js/gimmicks/math.js',
-            // 'js/gimmicks/leaflet.js',
-            // 'js/gimmicks/twitter.js',
-            // 'js/gimmicks/youtube_embed.js',
-            // 'js/gimmicks/yuml.js'
-        ],
-
         // REMEMBER:
         // * ORDER OF FILES IS IMPORTANT
         // * ALWAYS ADD EACH FILE TO BOTH minified/unminified SECTIONS!
         cssFiles: [
             'tmp/main.min.css',
         ],
-        jsFiles: [
-            'bower_components/jquery/jquery.min.js',
-            'node_modules/handlebars/dist/handlebars.runtime.min.js',
-            'extlib/js/jquery.colorbox.min.js',
-            'extlib/js/prism.js',
-            'bower_components/bootstrap/js/affix.js',
-            'bower_components/bootstrap/js/dropdown.js',
-        ],
         // for debug builds use unminified versions:
         unminifiedCssFiles: [
             'tmp/main.css'
         ],
-        unminifiedJsFiles: [
-            'bower_components/jquery/jquery.js',
-            'bower_components/bootstrap/js/affix.js',
-            'bower_components/bootstrap/js/dropdown.js',
-            'node_modules/handlebars/dist/handlebars.runtime.js',
-            'extlib/js/prism.js',
-            'extlib/js/jquery.colorbox.js',
-        ],
-
-        ts: {
-            // TOD: use tsconfig.json as soon as tsconfig.json supports globs/wildcards
-            base: {
-                tsconfig: "js/ts/tsconfig.json"
-            }
-        },
 
         less: {
             min: {
@@ -110,16 +57,6 @@ module.exports = function(grunt) {
             },
         },
 
-        concat: {
-            options: {
-                //banner: '<%= banner %>',
-                stripBanners: true
-            },
-            dev: {
-                src: '<%= ownJsFiles %>',
-                dest: 'tmp/<%= pkg.name %>.js'
-            }
-        },
         uglify: {
             options: {
                 // banner: '<%= banner %>'
@@ -182,18 +119,7 @@ module.exports = function(grunt) {
                     stdout: true
                 },
                 command: 'cd release && zip -r mdwiki-<%= grunt.config("pkg").version %>.zip mdwiki-<%= grunt.config("pkg").version %>'
-            },
-            /* precompilation of our handlebars templates */
-            //compile_templates: {
-            //    options: {
-            //        stdout: true
-            //    },
-            // -n mdwiki = Namespace is mdwiki
-            // -f outputfile
-            // -r root for the templates (will mirror the FS structure to the template name)
-            // -m = minify
-            //    command: './node_modules/.bin/handlebars -f tmp/MDwiki.templates.js -r templates -m templates/**/*.html'
-            //}
+            }
         },
         watch: {
             files: [
@@ -208,10 +134,6 @@ module.exports = function(grunt) {
                 'index.tmpl'
             ],
             tasks: ['debug','reload' ]
-        },
-        reload: {
-            port: 35729,
-            liveReload: {}
         },
         'http-server': {
             'dev': {
@@ -237,22 +159,10 @@ module.exports = function(grunt) {
         createIndex(grunt, 'debug');
     });
 
-    /*grunt.registerTask('assembleTemplates', 'Adds a script tag with id to each template', function() {
-        var templateString = '';
-        grunt.file.recurse('templates/', function(abspath, rootdir, subdir, filename){
-            var intro = '<script type="text/html" id="/' + rootdir.replace('/','') + '/' + subdir.replace('/','') + '/' + filename.replace('.html','') + '">\n';
-            var content = grunt.file.read(abspath);
-            var outro = '</script>\n';
-            templateString += intro + content + outro;
-        });
-        grunt.file.write('tmp/templates.html', templateString);
-    });*/
-
-
     /*** NAMED TASKS ***/
-    grunt.registerTask('release', [ 'ts', 'less:min', 'shell:compile_templates', 'concat:dev', 'uglify:dist', 'index' ]);
-    grunt.registerTask('debug', [ 'ts', 'less:dev', /*'shell:compile_templates', !!!!! precompile templates with handlebars first*/ 'concat:dev',  'index_debug' ]);
-    grunt.registerTask('devel', [ 'debug', 'server', 'unittests', 'reload', 'watch' ]);
+    grunt.registerTask('release', [ 'index' ]);
+    grunt.registerTask('debug', [ 'index_debug' ]);
+    grunt.registerTask('devel', [ 'debug', 'server', 'unittests', 'watch' ]);
     grunt.registerTask('unittests', [ 'copy:unittests' ]);
 
     grunt.registerTask('server', [ 'http-server:dev' ]);

@@ -1,0 +1,24 @@
+{
+    /*"compilerOptions": {
+        "target": "ES5",
+        "outFile": "ts_compiled/mdwiki_ts.js",
+        "declaration": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "reactNamespace": "JsxRender"
+    }*/
+    "compilerOptions": {
+        "outDir": "dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        //"module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "module": "esnext",
+        //"strict": true,
+        "importHelpers": true
+    }
+}

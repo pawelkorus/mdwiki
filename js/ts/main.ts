@@ -1,12 +1,17 @@
 declare var MDwikiEnableDebug: any;
 
-(function($) {
+import { StageChain } from './stage';
+import { Wiki } from './wiki';
+import { GimmickLoader } from './gimmickloader';
+import { LogLevel, Logger } from './logger';
 
-    var logger;
+(function($:JQueryStatic) {
+
+    var logger:Logger;
     if (typeof(MDwikiEnableDebug) != "undefined")
-        logger = new MDwiki.Util.Logger(MDwiki.Util.LogLevel.DEBUG);
+        logger = new Logger(LogLevel.DEBUG);
     else
-        logger = new MDwiki.Util.Logger(MDwiki.Util.LogLevel.ERROR);
+        logger = new Logger(LogLevel.ERROR);
 
     $.md.getLogger = function() {
         return logger;
@@ -17,7 +22,7 @@ declare var MDwikiEnableDebug: any;
         // this is the main object graph composition root
         var stageChain = new StageChain();
         var gimmickLoader = new GimmickLoader(stageChain);
-        var wiki  = new MDwiki.Core.Wiki(gimmickLoader, stageChain);
+        var wiki  = new Wiki(gimmickLoader, stageChain, $(document));
 
         $.md.wiki = wiki;
 
