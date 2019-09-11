@@ -3,31 +3,19 @@ import $ from 'jquery';
 window.jQuery = $;
 // @ts-ignore
 window.$ = $;
-import Handlebars from 'handlebars';
-// @ts-ignore
-window.Handlebars = Handlebars;
 
 import 'jquery-colorbox';
 import 'bootstrap';
 
 import './ts/globals';
 import './init';
-//import './marked';
 
-import '../tmp/MDWiki.templates';
 import './ts/basic_skeleton';
-//import './ts/utils';
-//import './ts/template';
 import './ts/bootstrap';
-//import './ts/gimmickparser';
-//import './ts/gimmickloader';
 import './ts/jsxRender';
-//import './ts/LinkRewriter';
-//import './ts/logger';
 import './ts/main';
 import './ts/markdown';
 import './ts/navigationmodel';
-//import './ts/stage';
 import './ts/theme';
 import './ts/wiki';
 

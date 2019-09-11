@@ -37,6 +37,10 @@ module.exports = {
                 }, {
                   loader: 'sass-loader' // compiles Sass to CSS
                 }]
+            },
+            {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
             }
         ]
     },
@@ -50,8 +54,7 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
           $: 'jquery',
-          jQuery: 'jquery',
-          Handlebars: 'handlebars'
+          jQuery: 'jquery'
         })
     ]
 };

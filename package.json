@@ -14,7 +14,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-http-server": "^2.0.0",
     "grunt-shell": "^1.3.0",
-    "handlebars": "^4.0.4",
+    "handlebars-loader": "1.7.1",
     "load-grunt-tasks": "*",
     "node-sass": "4.12.0",
     "postcss-loader": "3.0.0",
@@ -31,7 +31,6 @@
   },
   "scripts": {
     "typings-install": "typings install",
-    "handlebars": "handlebars -f tmp/MDwiki.templates.js -r templates -m templates/**/*.html",
     "build-debug": "webpack --mode development && grunt debug",
     "build-release": "grunt release",
     "develop": "grunt devel"
@@ -41,6 +40,7 @@
     "jquery": "3.4.1",
     "jquery-colorbox": "1.6.4",
     "popper.js": "1.15.0",
-    "prismjs": "1.17.1"
+    "prismjs": "1.17.1",
+    "handlebars": "4.0.4"
   }
 }

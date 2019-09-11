@@ -5,16 +5,8 @@ export class Template {
 
     private renderedTemplate: any;
 
-    constructor(path?: string) {
-        if (path) {
-            // remove leading slashes
-            while (path.startsWith('/'))
-                path = path.substring(1, path.length);
-
-            // TODO remove .html from CALLER instead of this
-            path = path + ".html";
-            this.templateFunction = Handlebars.templates[path];
-        }
+    constructor(templateFunction:Function) {
+        this.templateFunction = templateFunction;
     }
 
     render () {
@@ -32,7 +24,7 @@ export class Template {
      * @param node - The node that will be replaced
      * @returns {JQuery} The newly inserted node
      */
-    replace (node: any) : JQuery {
+    replace (node:any) : JQuery {
         this.assertTemplateIsReady();
         var rendered_template = $(this.renderedTemplate);
         $(node).replaceWith(rendered_template);
@@ -48,6 +40,7 @@ export class Template {
         this.assertTemplateIsReady();
         return $(this.renderedTemplate).insertAfter(node);
     }
+    
     insertBefore (node: any) {
         this.assertTemplateIsReady();
         return $(this.renderedTemplate).insertBefore(node);

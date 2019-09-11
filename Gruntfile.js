@@ -1,17 +1,3 @@
-var createIndex = function (grunt, taskname) {
-    'use strict';
-    var conf = grunt.config('index')[taskname],
-        tmpl = grunt.file.read(conf.template);
-
-    grunt.config.set('templatesString', '');
-
-    // register the task name in global scope so we can access it in the .tmpl file
-    grunt.config.set('currentTask', {name: taskname});
-
-    grunt.file.write(conf.dest, grunt.template.process(tmpl));
-    grunt.log.writeln('Generated \'' + conf.dest + '\' from \'' + conf.template + '\'');
-};
-
 /*global module:false*/
 module.exports = function(grunt) {
     'use strict';
@@ -25,46 +11,6 @@ module.exports = function(grunt) {
         pkg: {
             name: 'MDwiki',
             version: '0.7.0'
-        },
-
-        // REMEMBER:
-        // * ORDER OF FILES IS IMPORTANT
-        // * ALWAYS ADD EACH FILE TO BOTH minified/unminified SECTIONS!
-        cssFiles: [
-            'tmp/main.min.css',
-        ],
-        // for debug builds use unminified versions:
-        unminifiedCssFiles: [
-            'tmp/main.css'
-        ],
-
-        less: {
-            min: {
-                options: {
-                    compress: true,
-                },
-                files: {
-                    'tmp/main.min.css': 'styles/main.less',
-                },
-            },
-            dev: {
-                options: {
-                    compress: false,
-                },
-                files: {
-                    'tmp/main.css': 'styles/main.less',
-                },
-            },
-        },
-
-        uglify: {
-            options: {
-                // banner: '<%= banner %>'
-            },
-            dist: {
-                src: '<%= concat.dev.dest %>',
-                dest: 'tmp/<%= pkg.name %>.min.js'
-            }
         },
         index: {
             release: {
@@ -111,6 +57,12 @@ module.exports = function(grunt) {
                     src: 'bower_components/jquery/jquery.min.js',
                     dest: 'unittests/lib/'
                 }]
+            }, 
+            index: {
+                expand: true,
+                flatten: true,
+                src: [ 'js/index.html' ],
+                dest: 'dist/'
             }
         },
         shell: {
@@ -121,23 +73,9 @@ module.exports = function(grunt) {
                 command: 'cd release && zip -r mdwiki-<%= grunt.config("pkg").version %>.zip mdwiki-<%= grunt.config("pkg").version %>'
             }
         },
-        watch: {
-            files: [
-                'Gruntfile.js',
-                'js/*.js',
-                'js/**/*.js',
-                'js/ts/**/*.ts',
-                'js/**/*.tsx',
-                'unittests/**/*.js',
-                'unittests/**/*.html',
-                'templates/**/*.html',
-                'index.tmpl'
-            ],
-            tasks: ['debug','reload' ]
-        },
         'http-server': {
             'dev': {
-                root:'./',
+                root:'./dist',
                 port: 8080,
                 host: "0.0.0.0",
                 cache: 1,
@@ -149,20 +87,10 @@ module.exports = function(grunt) {
         }
     });
 
-    /*** CUSTOM CODED TASKS ***/
-    grunt.registerTask('index', 'Generate mdwiki.html, inline all scripts', function() {
-        createIndex(grunt, 'release');
-    });
-
-    /* Debug is basically the releaes version but without any minifing */
-    grunt.registerTask('index_debug', 'Generate mdwiki-debug.html, inline all scripts unminified', function() {
-        createIndex(grunt, 'debug');
-    });
-
     /*** NAMED TASKS ***/
-    grunt.registerTask('release', [ 'index' ]);
-    grunt.registerTask('debug', [ 'index_debug' ]);
-    grunt.registerTask('devel', [ 'debug', 'server', 'unittests', 'watch' ]);
+    grunt.registerTask('release', [ 'copy:index' ]);
+    grunt.registerTask('debug', [ 'copy:index' ]);
+    grunt.registerTask('devel', [ 'debug', 'server' ]);
     grunt.registerTask('unittests', [ 'copy:unittests' ]);
 
     grunt.registerTask('server', [ 'http-server:dev' ]);

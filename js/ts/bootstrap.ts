@@ -1,6 +1,8 @@
 import { Util as util } from './utils';
 import { Template } from './template';
 import { StageChain } from './stage';
+import navbarTpl from './navbar.hbs';
+import footerTpl from './footer.hbs';
 
 export class Bootstrap {
     private events:any[] = [];
@@ -81,7 +83,7 @@ export class Bootstrap {
         // menusrc += '<div id="md-menu-inner" class="container">';
         // menusrc += '<ul id="md-menu-ul" class="nav navbar-nav">';
         // menusrc += '</ul></div>';
-        var navbar = new Template("navigation/navbar");
+        var navbar = new Template(navbarTpl);
         navbar.appendTo('#md-menu');
         // .eq(0) becase we dont want navbar-right to be appended to
         $('#md-menu ul.navbar-nav').eq(0).append($menuContent);
@@ -447,7 +449,7 @@ export class Bootstrap {
     // note: the footer is part of the GPLv3 legal information
     // and may not be removed or hidden to comply with licensing conditions.
     private addFooter() {
-        var footer_template = new Template("layout/footer");
+        var footer_template = new Template(footerTpl);
         var $rendered = footer_template.insertAfter($('#md-all'));
     }
 

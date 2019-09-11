@@ -1,5 +1,6 @@
-import {Template} from './template';
-import {Util} from './utils';
+import { Template } from './template';
+import { Util } from './utils';
+import paragraphTpl from './paragraph.hbs';
 /*
     Split this out into:
       * tasks that need to be done as part of markdown postprocessing
@@ -73,7 +74,7 @@ export class PageSkeleton {
             // images & hyperlinked images within a paragraph always go first/last of the paragraph
             // so we apply the corresponding float classes
 
-            var templ = new Template('layout/paragraph');
+            var templ = new Template(paragraphTpl);
             var $inserted_node:JQuery<HTMLElement> = templ.insertAfter($p);
 
             var floatClass = self.getFloatClass($p);
