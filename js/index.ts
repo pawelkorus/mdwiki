@@ -24,6 +24,4 @@ import './main';
 import './gimmicks/templating';
 import './gimmicks/prism';
 
-import '../styles/main.scss';
-import '../styles/mdwiki.css';
-import '../extlib/css/colorbox.css';
+import './main.scss';
