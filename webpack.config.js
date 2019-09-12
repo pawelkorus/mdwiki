@@ -51,7 +51,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ]
+        extensions: [ '.tsx', '.ts', '.js' ],
+        alias: {
+            handlebars: 'handlebars/lib/handlebars.js'
+        }
     },
     output: {
         filename: 'bundle.js',
