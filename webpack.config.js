@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 module.exports = {
     entry: './js/index.ts',
@@ -55,6 +57,11 @@ module.exports = {
         new webpack.ProvidePlugin({
           $: 'jquery',
           jQuery: 'jquery'
-        })
+        }),
+        new HtmlWebpackPlugin({
+          inlineSource: '.(js|css)$', // embed all javascript and css inline
+          template: 'js/index.hbs'
+        }),
+        new HtmlWebpackInlineSourcePlugin()
     ]
 };

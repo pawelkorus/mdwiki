@@ -57,12 +57,6 @@ module.exports = function(grunt) {
                     src: 'bower_components/jquery/jquery.min.js',
                     dest: 'unittests/lib/'
                 }]
-            }, 
-            index: {
-                expand: true,
-                flatten: true,
-                src: [ 'js/index.html' ],
-                dest: 'dist/'
             }
         },
         shell: {
@@ -88,18 +82,15 @@ module.exports = function(grunt) {
     });
 
     /*** NAMED TASKS ***/
-    grunt.registerTask('release', [ 'copy:index' ]);
-    grunt.registerTask('debug', [ 'copy:index' ]);
-    grunt.registerTask('devel', [ 'debug', 'server' ]);
+    grunt.registerTask('devel', [ 'server' ]);
     grunt.registerTask('unittests', [ 'copy:unittests' ]);
 
     grunt.registerTask('server', [ 'http-server:dev' ]);
 
     grunt.registerTask('distrelease',[
-        'release', 'debug',
         'copy:release', 'copy:release_debug', 'copy:release_templates',
         'shell:zip_release'
     ]);
     // Default task
-    grunt.registerTask('default', [ 'release', 'debug', 'unittests' ] );
+    grunt.registerTask('default', [ 'unittests' ] );
 };
