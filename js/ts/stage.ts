@@ -1,5 +1,3 @@
-declare var marked: any;
-
 export interface DoneCallback {
     (): void;
 }

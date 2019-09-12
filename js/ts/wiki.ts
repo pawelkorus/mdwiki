@@ -5,7 +5,7 @@ import { StageChain, Stage, Resource, DoneCallback } from './stage';
 import { PageSkeleton } from './basic_skeleton';
 import { Bootstrap } from './bootstrap';
 import { Markdown, MarkdownPostprocessing } from './markdown';
-import marked from '../marked';
+import marked from 'marked';
 
 let defaultConfig = {
     title: '',

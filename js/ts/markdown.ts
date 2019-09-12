@@ -1,4 +1,4 @@
-import marked from '../marked';
+import marked from 'marked';
 
 export class MarkdownPostprocessing {
     public process (dom: JQuery<HTMLElement>): void {

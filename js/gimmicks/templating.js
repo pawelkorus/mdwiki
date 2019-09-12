@@ -1,6 +1,7 @@
 let Gimmick = require('../ts/gimmickloader').Gimmick,
     GimmickHandler = require('../ts/gimmickloader').GimmickHandler,
-    Handlebars = require('handlebars');
+    Handlebars = require('handlebars'),
+    marked = require('marked');
 
 (function($, Handlebars) {
     var templateGimmick = new Gimmick('template');

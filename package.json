@@ -2,6 +2,7 @@
   "name": "mdwiki",
   "version": "0.1.0",
   "devDependencies": {
+    "@types/marked": "0.6.5",
     "@types/handlebars": "^4.1.0",
     "@types/jquery": "^3.3.31",
     "css-loader": "3.2.0",
@@ -34,10 +35,11 @@
   },
   "dependencies": {
     "bootstrap": "4.3.1",
+    "handlebars": "4.0.4",
     "jquery": "3.4.1",
     "jquery-colorbox": "1.6.4",
+    "marked": "0.7.0",
     "popper.js": "1.15.0",
-    "prismjs": "1.17.1",
-    "handlebars": "4.0.4"
+    "prismjs": "1.17.1"
   }
 }
