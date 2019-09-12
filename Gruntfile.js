@@ -12,16 +12,6 @@ module.exports = function(grunt) {
             name: 'MDwiki',
             version: '0.7.0'
         },
-        index: {
-            release: {
-                template: 'index.tmpl',
-                dest: 'dist/mdwiki.html'
-            },
-            debug: {
-                template: 'index.tmpl',
-                dest: 'dist/mdwiki-debug.html'
-            }
-        },
         lib_test: {
             src: ['lib/**/*.js', 'test/**/*.js']
         },
@@ -66,31 +56,17 @@ module.exports = function(grunt) {
                 },
                 command: 'cd release && zip -r mdwiki-<%= grunt.config("pkg").version %>.zip mdwiki-<%= grunt.config("pkg").version %>'
             }
-        },
-        'http-server': {
-            'dev': {
-                root:'./dist',
-                port: 8080,
-                host: "0.0.0.0",
-                cache: 1,
-                showDir : true,
-                autoIndex: true,
-                defaultExt: "html",
-                runInBackground: false
-            }
         }
     });
 
     /*** NAMED TASKS ***/
-    grunt.registerTask('devel', [ 'server' ]);
     grunt.registerTask('unittests', [ 'copy:unittests' ]);
-
-    grunt.registerTask('server', [ 'http-server:dev' ]);
 
     grunt.registerTask('distrelease',[
         'copy:release', 'copy:release_debug', 'copy:release_templates',
         'shell:zip_release'
     ]);
+    
     // Default task
     grunt.registerTask('default', [ 'unittests' ] );
 };

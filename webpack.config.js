@@ -5,6 +5,10 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 
 module.exports = {
     entry: './js/index.ts',
+    mode: 'development',
+    devServer: {
+      contentBase: './dist'
+    },
     module: {
         rules: [
             {
